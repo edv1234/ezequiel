@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+
+{% block contenido %}
+  <h2>Buscar Posts</h2>
+  <form method="get">
+    <input type="text" name="q" placeholder="Buscar por título" value="{{ consulta|default_if_none:'' }}">
+    <button type="submit">Buscar</button>
+  </form>
+
+  {% if consulta %}
+    <h3>Resultados para "{{ consulta }}":</h3>
+    {% if resultados %}
+      <ul>
+        {% for post in resultados %}
+          <li><strong>{{ post.titulo }}</strong> - {{ post.autor }} ({{ post.categoria }})</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No se encontraron resultados.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}
